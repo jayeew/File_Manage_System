@@ -52,7 +52,7 @@ public class PageBean<T> {
             this.start = pageNum - 2;
             this.end = pageNum + 2;
             
-            if(start < 0){
+            if(start <= 0){
                 //比如当前页是第1页，或者第2页，那么就不如和这个规则，
                 this.start = 1;
                 this.end = 5;
