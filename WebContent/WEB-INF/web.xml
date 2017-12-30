@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+ 
+		
+ 	<!--DispatcherServlet  -->
+	 <!-- The front controller of this Spring Web application, responsible for handling all application requests -->
+	<servlet>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:springmvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	
+	
+	<servlet-mapping>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 配置org.springframework.web.filter.HiddenHttpMethodFilter -->
+	<filter>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+</web-app>
+<!-- 
+	1.用戶請求到 前端控制器DispatcherServlet('/'攔截全部請求)
+	2.DispatcherServlet請求 處理器映射器HandlerMapping 通過xml或注解方式 去查找處理器 Handler
+ 	3.找到以後，HandlerMapping 向 DispatcherServlet 返回執行鏈 HandlerExecutionChain
+ 	4.DispatcherServlet調用 處理器適配器HandlerAdapter 去執行 處理器Handler
+ 	5.Handler 執行完畢后，給 HandlerAdapter 返回 ModelAndView
+ 	6.HandlerAdapter 向 DispatcherServlet 返回 ModelAndView
+ 	7.DispatcherServlet 請求 視圖解析器 ViewResolver 去進行試圖渲染
+ 	8.ViewResolver 向 DispatcherServlet 返回 視圖View
+ 	9.DispatcherServlet  對 View 進行渲染
+ 	10.DispatcherServlet 向 用戶響應結果
+ -->
