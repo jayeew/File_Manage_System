@@ -124,7 +124,7 @@ public class SpringMVCTest {
 			return "main";
 		}
 		else
-			return "main";
+			return "redirect:/index.jsp";
 	}
 	/*
 	 * 
