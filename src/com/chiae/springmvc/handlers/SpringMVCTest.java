@@ -50,7 +50,7 @@ public class SpringMVCTest {
 	// 驱动程序名
 	String driver = "com.mysql.jdbc.Driver";
 	// URL指向要访问的数据库名hello
-	String url = "jdbc:mysql://118.89.225.128:3306/springmvc";
+	String url = "jdbc:mysql://*.*.*.*:3306/springmvc";
 	// MySQL配置
 	String sqluser = "root";
 	String sqlpassword = "123";

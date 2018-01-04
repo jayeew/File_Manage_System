@@ -17,7 +17,7 @@ import com.chiae.springmvc.entities.File_;
 public class File_Dao {
 
 	String driver = "com.mysql.jdbc.Driver";
-	String url = "jdbc:mysql://118.89.225.128:3306/springmvc";
+	String url = "jdbc:mysql://*.*.*.*:3306/springmvc";
 	String sqluser = "root";
 	String sqlpassword = "123";
 
