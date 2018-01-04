@@ -1,0 +1,55 @@
+CREATE TABLE IF NOT EXISTS `File_T`(
+   `file_id` INT  NOT NULL AUTO_INCREMENT,
+   `file_name` VARCHAR(50) NOT NULL,
+   `file_url` VARCHAR(120) NOT NULL,
+   `file_data` VARCHAR(50) NOT NULL,
+   `file_download` INT  NOT NULL,
+   `file_currenttime` VARCHAR(30) NOT NULL,
+   `file_size` VARCHAR(10) NOT NULL,
+   `file_Uper` VARCHAR(60) NOT NULL,
+   `file_desc` VARCHAR(200) ,
+   PRIMARY KEY ( `file_id` )
+);
+
+CREATE TABLE IF NOT EXISTS `User_db`(
+   `id` INT  NOT NULL AUTO_INCREMENT,
+   `email` VARCHAR(50) NOT NULL,
+   `password` VARCHAR(30) NOT NULL,
+   PRIMARY KEY ( `id` )
+);
+
+//tomcat配置
+unzip apache-tomcat-9.0.2.zip
+mv apache-tomcat-9.0.2/ /usr/local/
+cd /usr/local/
+ln -s /usr/local/apache-tomcat-9.0.2/ /usr/local/tomcat
+cd tomcat/bin/
+vim catalina.sh
+//添加
+CATALINA_HOME=/usr/local/apache-tomcat-9.0.2/
+//启动
+/usr/local/tomcat/bin/catalina.sh start
+vim conf/server.xml
+	<Connector port="80" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+	 <Engine name="Catalina" defaultHost="www.chiae.cn">
+	 <Host name="www.chiae.cn"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true">
+
+        <Context path="" docBase="/usr/local/apache-tomcat-9.0.2/webapps/springmvc-.war" debug="0" 	reloadable="true"/>
+//80重定向8080
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+service iptables save  
+ 
+//mysql配置
+yum -y install mysql-server
+chkconfig mysqld on  //设置开机启动
+service mysqld start
+select user,host,password from mysql.user; //查询用户密码
+ set password for root@localhost=password('123'); //设置root密码
+//远程访问权限
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'IDENTIFIED BY '123' WITH GRANT OPTION;
+
+//java运行环境
+yum -y install java-1.8.0-openjdk*
